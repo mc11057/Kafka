@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("/api/v1/transaction")
 public class TransactionController {
 
 private final TransactionService transactionService;
@@ -17,18 +17,19 @@ private final TransactionService transactionService;
     public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
-
+    @CrossOrigin
     @PostMapping()
     public ResponseEntity publishTransaction(@RequestBody Transaction transaction)
     {
         try{
-            transactionService.handleNewTransaction(transaction);
+            transactionService.createTransaction(transaction);
             return new ResponseEntity<>("Message published and sent", HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
     }
+    @CrossOrigin
     @GetMapping
     public ResponseEntity getAllTransactions(){
         try{

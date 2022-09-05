@@ -21,7 +21,7 @@ public class TransactionHandler implements TransactionService{
     }
 
     @Override
-    public void handleNewTransaction(Transaction transaction) throws JsonProcessingException {
+    public void createTransaction(Transaction transaction) throws JsonProcessingException {
         //publishing transaction
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String jsonMessage = ow.writeValueAsString(transaction);
